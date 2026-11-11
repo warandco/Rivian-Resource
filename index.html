@@ -65,7 +65,7 @@
     .stock-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
     .stock-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--text-dim); }
     .stock-note { font-size: 10px; color: var(--text-dim); }
-    .tradingview-widget-container { min-height: 90px; }
+    .tradingview-widget-container { min-height: 220px; }
 
     /* ── LAYOUT ── */
     .page-body { padding: 28px 0 60px; }
@@ -196,16 +196,21 @@
             <span class="stock-label">RIVN · Nasdaq</span>
             <span class="stock-note">Delayed quote</span>
           </div>
-          <!-- TradingView single-quote widget (free, no API key) -->
+          <!-- TradingView mini symbol overview: price, change, 1-month chart (free, no API key) -->
           <div class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
             {
               "symbol": "NASDAQ:RIVN",
               "width": "100%",
-              "isTransparent": true,
+              "height": 220,
+              "locale": "en",
+              "dateRange": "1M",
               "colorTheme": "light",
-              "locale": "en"
+              "isTransparent": true,
+              "autosize": false,
+              "chartOnly": false,
+              "noTimeScale": false
             }
             </script>
           </div>
