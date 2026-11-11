@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rivian News, Delivery Checklist &amp; Owner Resources | Rivian Resource</title>
-  <meta name="description" content="A weekly digest of Rivian news with plain-English context for buyers, plus a 55-point delivery checklist, recall VIN lookup, owner-tested accessories, and links to the best Rivian tools." />
+  <meta name="description" content="The latest Rivian news headlines, plus a 55-point delivery checklist, recall VIN lookup, owner-tested accessories, and links to the best Rivian tools." />
   <link rel="canonical" href="https://www.rivianresource.com/" />
   <meta property="og:title" content="Rivian Resource — Rivian News, Buyer Tools &amp; Owner Resources"/>
-  <meta property="og:description" content="Weekly Rivian news digest, delivery checklist, recall lookup, accessories, and a directory of the best Rivian owner tools."/>
+  <meta property="og:description" content="Latest Rivian news, delivery checklist, recall lookup, accessories, and a directory of the best Rivian owner tools."/>
   <meta property="og:image" content="https://www.rivianresource.com/r1s.jpg" />
   <meta property="og:url" content="https://www.rivianresource.com/" />
   <meta property="og:type" content="website" />
@@ -86,14 +86,17 @@
     .digest-title { font-family: 'DM Sans', sans-serif; font-size: clamp(17px, 2vw, 21px); font-weight: 800; letter-spacing: -.02em; }
     .digest-date { font-size: 12px; font-weight: 600; color: var(--text-dim); }
     .digest-intro { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; }
-    .story { padding: 16px 0; border-bottom: 1px solid var(--border); }
-    .story:last-of-type { border-bottom: none; padding-bottom: 4px; }
-    .story-source { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--green); margin-bottom: 4px; }
-    .story-headline { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 700; line-height: 1.35; margin-bottom: 6px; }
-    .story-headline a { color: var(--text); text-decoration: none; }
-    .story-headline a:hover { color: var(--green); }
-    .story-take { font-size: 13.5px; color: var(--text-muted); line-height: 1.65; }
-    .story-take strong { color: var(--text); }
+
+    .news-list { list-style: none; }
+    .news-item { padding: 13px 0; border-bottom: 1px solid var(--border); }
+    .news-item:last-child { border-bottom: none; padding-bottom: 2px; }
+    .news-item a { font-family: 'DM Sans', sans-serif; font-size: 14.5px; font-weight: 700; line-height: 1.4; color: var(--text); text-decoration: none; }
+    .news-item a:hover { color: var(--green); }
+    .news-meta { margin-top: 4px; font-size: 11px; font-weight: 600; color: var(--text-dim); }
+    .news-meta .src { color: var(--green); text-transform: uppercase; letter-spacing: .06em; font-size: 10px; font-weight: 700; margin-right: 6px; }
+    .news-loading { padding: 14px 0; font-size: 13px; color: var(--text-dim); }
+    .news-fallback { padding-top: 8px; font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+    .news-fallback a { color: var(--green); font-weight: 600; }
 
     /* ── TOOLS ── */
     .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -181,10 +184,10 @@
       <div class="hero-inner">
         <div>
           <div class="hero-eyebrow">Independent · Not affiliated with Rivian</div>
-          <h1 class="hero-title">Rivian news that matters <em>if you're buying</em>, plus the tools to do it right.</h1>
-          <p class="hero-sub">A short weekly digest of what changed at Rivian and why it matters to buyers and owners, a delivery checklist that catches problems before you sign, and a directory of the best tools the Rivian community has built.</p>
+          <h1 class="hero-title">The latest <em>Rivian news</em>, plus the tools to buy and own one right.</h1>
+          <p class="hero-sub">Rivian headlines from the sources that cover it best, a delivery checklist that catches problems before you sign, and a directory of the best tools the Rivian community has built.</p>
           <div class="hero-cta-row">
-            <a href="#digest" class="btn-primary">This week's digest &darr;</a>
+            <a href="#digest" class="btn-primary">Latest news &darr;</a>
             <a href="/delivery/" class="btn-secondary">Delivery checklist</a>
           </div>
         </div>
@@ -219,34 +222,22 @@
         <!-- MAIN COLUMN -->
         <div class="main-col">
 
-          <!-- WEEKLY DIGEST
-               To publish a new week: update the date, replace the .story blocks (3–5 max).
-               Each story = source, linked headline, and 1–2 sentences of YOUR take.
-               Never paste article text; write the "why it matters" in your own words. -->
+          <!-- LIVE NEWS FEED — headlines come from the rivian-news-feed Cloudflare Worker.
+               Nothing to update by hand. If the Worker is down, the fallback links show instead. -->
           <section class="card digest-card" id="digest">
             <div class="digest-head">
-              <h2 class="digest-title">The Rivian Week</h2>
-              <span class="digest-date">Week of Nov 9, 2026</span>
+              <h2 class="digest-title">Latest Rivian News</h2>
+              <span class="digest-date" id="newsUpdated"></span>
             </div>
-            <p class="digest-intro">What changed, and what it means if you're shopping or already own one.</p>
-
-            <article class="story">
-              <div class="story-source">Rivian Q3 2026 results</div>
-              <h3 class="story-headline"><a href="https://www.just-auto.com/newsletters/rivian-raises-2026-guidance-q3-revenue-growth" target="_blank" rel="noopener noreferrer">Rivian raises 2026 delivery guidance after a 38% revenue jump</a></h3>
-              <p class="story-take"><strong>Why it matters:</strong> Q3 revenue hit $2.16B on 19,248 deliveries, and full-year guidance moved up to 67,000–70,000. For buyers, a company raising targets instead of cutting them is the best signal you'll get that service, parts, and software support aren't going anywhere.</p>
-            </article>
-
-            <article class="story">
-              <div class="story-source">R2</div>
-              <h3 class="story-headline"><a href="https://driveteslacanada.ca/news/rivian-q3-2026-earnings-revenue-r2-best-seller/" target="_blank" rel="noopener noreferrer">R2 is now Rivian's best-selling vehicle</a></h3>
-              <p class="story-take"><strong>Why it matters:</strong> Volume means more R2s at delivery centers and more first-batch quirks showing up. If you're taking an R2 delivery soon, run the inspection checklist rather than trusting the walk-around.</p>
-            </article>
-
-            <article class="story">
-              <div class="story-source">R2 lineup</div>
-              <h3 class="story-headline"><a href="https://rivian.com/investors/news" target="_blank" rel="noopener noreferrer">R2 Premium trim slated for late 2026 at $53,990</a></h3>
-              <p class="story-take"><strong>Why it matters:</strong> Rivian's March lineup announcement put the Premium trim below the launch Performance model. If you don't need Launch Package extras, it may be worth waiting rather than ordering the first trim available.</p>
-            </article>
+            <p class="digest-intro">Headlines from RivianTrackr, Electrek, and InsideEVs. Links open the original story.</p>
+            <ul class="news-list" id="newsList" aria-live="polite">
+              <li class="news-loading">Loading headlines…</li>
+            </ul>
+            <div class="news-fallback" id="newsFallback" hidden>
+              Headlines are unavailable right now. For the latest, visit
+              <a href="https://riviantrackr.com" target="_blank" rel="noopener noreferrer">RivianTrackr</a> or
+              <a href="https://electrek.co/guides/rivian/" target="_blank" rel="noopener noreferrer">Electrek</a>.
+            </div>
           </section>
 
           <!-- TOOLS -->
@@ -389,6 +380,39 @@
         setTimeout(() => { btn.textContent = original; }, 2000);
       });
     }
+
+    // ─── Live news feed ───
+    const NEWS_URL = 'https://rivian-news-feed.scott-b9a.workers.dev/';
+    (function loadNews() {
+      const list = document.getElementById('newsList');
+      const fallback = document.getElementById('newsFallback');
+      const updated = document.getElementById('newsUpdated');
+      const fmt = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' });
+      const showFallback = () => { list.innerHTML = ''; fallback.hidden = false; };
+      fetch(NEWS_URL)
+        .then(r => r.ok ? r.json() : Promise.reject())
+        .then(data => {
+          if (!data.items || !data.items.length) return showFallback();
+          list.innerHTML = '';
+          data.items.forEach(item => {
+            const li = document.createElement('li');
+            li.className = 'news-item';
+            const a = document.createElement('a');
+            a.href = item.link; a.target = '_blank'; a.rel = 'noopener noreferrer';
+            a.textContent = item.title;
+            const meta = document.createElement('div');
+            meta.className = 'news-meta';
+            const src = document.createElement('span');
+            src.className = 'src'; src.textContent = item.source;
+            meta.appendChild(src);
+            if (item.date) meta.appendChild(document.createTextNode(fmt.format(new Date(item.date))));
+            li.append(a, meta);
+            list.appendChild(li);
+          });
+          if (data.updated) updated.textContent = 'Updated ' + fmt.format(new Date(data.updated));
+        })
+        .catch(showFallback);
+    })();
 
     document.addEventListener('DOMContentLoaded', () => {
       const vinInput = document.getElementById('vinInput');
