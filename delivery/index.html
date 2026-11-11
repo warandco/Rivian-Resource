@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rivian Delivery Checklist — 55-Point Inspection for R1S &amp; R1T (2026)</title>
-  <meta name="description" content="Don't sign until you check all 55 items. Owner-built delivery inspection checklist for the 2026 Rivian R1S and R1T — exterior, interior, tech, road test, and active recalls. Takes under an hour."/>
+  <title>Rivian Delivery Checklist — 59-Point Inspection for R2, R1S &amp; R1T</title>
+  <meta name="description" content="Don't sign until you check all 59 items. Owner-built delivery inspection checklist for the Rivian R2, R1S, and R1T — exterior, interior, tech, road test, and active recalls. Takes under an hour."/>
   <link rel="canonical" href="https://www.rivianresource.com/delivery/"/>
-  <meta property="og:title" content="Rivian R1S &amp; R1T Delivery Checklist — 55-Point Inspection Guide"/>
-  <meta property="og:description" content="A 55-point delivery inspection checklist for the 2026 Rivian R1S and R1T. Six sections covering exterior, interior, powertrain, tech, and documentation — designed to complete in under an hour."/>
+  <meta property="og:title" content="Rivian R2, R1S &amp; R1T Delivery Checklist — 59-Point Inspection Guide"/>
+  <meta property="og:description" content="A 59-point delivery inspection checklist for the Rivian R2, R1S, and R1T. Six sections covering exterior, interior, powertrain, tech, and documentation — designed to complete in under an hour."/>
   <meta property="og:image" content="https://www.rivianresource.com/r1s.jpg"/>
   <meta property="og:url" content="https://www.rivianresource.com/delivery/"/>
   <meta property="og:type" content="website"/>
@@ -150,7 +150,7 @@
     }
     @media (max-width: 760px) {
       .page-body { grid-template-columns: 1fr; }
-      .sidebar { display: none; }
+      .sidebar { position: static; }
     }
     .main-col { display: flex; flex-direction: column; gap: 12px; }
     /* ── MODEL FILTER ── */
@@ -593,7 +593,7 @@
 <!-- PROGRESS -->
 <div class="progress-bar-wrap">
   <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-  <div class="progress-label" id="progressLabel">0 / 55</div>
+  <div class="progress-label" id="progressLabel">0 / 59</div>
   <div class="progress-pct" id="progressPct">0%</div>
 </div>
 <!-- HEADER -->
@@ -601,9 +601,9 @@
   <div class="page-header-inner">
     <div class="eyebrow">Delivery Day · 2026 R1T, R1S &amp; R2</div>
     <h1 class="page-title">Rivian Delivery Checklist</h1>
-    <p class="page-sub">Tap each item before you sign. Photograph anything off, open a service ticket in the app, then enjoy your Rivian.</p>
+    <p class="page-sub"><strong style="color:#fff;">Inspect before you sign</strong> — that's when you have the most leverage. Tap each item, photograph anything off, open a service ticket in the app, then enjoy your Rivian.</p>
     <div class="header-stats">
-      <div class="stat-pill"><strong id="itemsStat">55</strong> items</div>
+      <div class="stat-pill"><strong id="itemsStat">59</strong> items</div>
       <div class="stat-pill"><strong>~45 min</strong> inspection</div>
       <div class="stat-pill"><strong>6</strong> sections</div>
     </div>
@@ -630,7 +630,7 @@
       <a href="#sec-docs">Recalls &amp; Docs</a>
     </nav>
     <!-- ══════════════════════════════════
-         1. EXTERIOR — 14 items
+         1. EXTERIOR — 15 items
     ═══════════════════════════════════════ -->
     <div class="checklist-section" id="sec-exterior">
       <div class="section-header" onclick="toggleSection('exterior')">
@@ -644,7 +644,7 @@
           </div>
         </div>
         <div class="section-right">
-          <div class="section-progress" id="prog-exterior">0/14</div>
+          <div class="section-progress" id="prog-exterior">0/15</div>
           <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
       </div>
@@ -670,6 +670,14 @@
           <div class="check-content">
             <div class="check-label">Paint — no chips, scratches, or swirl marks</div>
             <div class="check-note">Check all four corners and the hood leading edge in daylight or under the service center lights.</div>
+          </div>
+          <span class="badge badge-important">Important</span>
+        </div>
+        <div class="checklist-item" data-models="r1t r1s r2" onclick="toggleCheck(this,'exterior')">
+          <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="check-content">
+            <div class="check-label">Bumpers and body panels match the body color</div>
+            <div class="check-note">Look at the front and rear bumpers next to the fenders in daylight. Rivian paused about 800 Half Moon Grey R2 deliveries in July 2026 after one arrived with a bumper painted a different shade. Don't accept a "we'll swap it later" promise without it in writing.</div>
           </div>
           <span class="badge badge-important">Important</span>
         </div>
@@ -764,7 +772,7 @@
       </div>
     </div>
     <!-- ══════════════════════════════════
-         2. GLASS & WIPERS — 4 items
+         2. GLASS & WIPERS — 5 items
     ═══════════════════════════════════════ -->
     <div class="checklist-section" id="sec-glass">
       <div class="section-header" onclick="toggleSection('glass')">
@@ -778,7 +786,7 @@
           </div>
         </div>
         <div class="section-right">
-          <div class="section-progress" id="prog-glass">0/4</div>
+          <div class="section-progress" id="prog-glass">0/5</div>
           <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
       </div>
@@ -796,6 +804,14 @@
           <div class="check-content">
             <div class="check-label">Side, rear, and pano roof glass — no chips or cracks</div>
             <div class="check-note">Hairline cracks in the roof glass have been reported. Look from outside at an angle in daylight. Check the liftgate glass on R1S and R2 carefully.</div>
+          </div>
+          <span class="badge badge-important">Important</span>
+        </div>
+        <div class="checklist-item" data-models="r2" onclick="toggleCheck(this,'glass')">
+          <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="check-content">
+            <div class="check-label">Rear drop-down window lowers and raises fully <span class="model-tag">R2</span></div>
+            <div class="check-note">The R2's liftgate glass drops down into the liftgate. Run it all the way down and back up, and confirm it seals with no gap, rattle, or wind-noise path.</div>
           </div>
           <span class="badge badge-important">Important</span>
         </div>
@@ -818,7 +834,7 @@
       </div>
     </div>
     <!-- ══════════════════════════════════
-         3. INTERIOR — 14 items
+         3. INTERIOR — 15 items
     ═══════════════════════════════════════ -->
     <div class="checklist-section" id="sec-interior">
       <div class="section-header" onclick="toggleSection('interior')">
@@ -832,7 +848,7 @@
           </div>
         </div>
         <div class="section-right">
-          <div class="section-progress" id="prog-interior">0/14</div>
+          <div class="section-progress" id="prog-interior">0/15</div>
           <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
       </div>
@@ -880,6 +896,14 @@
         <div class="checklist-item" data-models="r1t r1s r2" onclick="toggleCheck(this,'interior')">
           <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="check-content">
+            <div class="check-label">Glovebox(es) open, latch, and stay closed</div>
+            <div class="check-note">Open and close every glovebox and storage compartment. The R2 has two — center and passenger side — and an early R2 owner found both broken after signing.</div>
+          </div>
+          <span class="badge badge-important">Important</span>
+        </div>
+        <div class="checklist-item" data-models="r1t r1s r2" onclick="toggleCheck(this,'interior')">
+          <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="check-content">
             <div class="check-label">Heat produces warm air within 5 minutes</div>
             <div class="check-note">Set to max heat and time it. A heat pump should warm the cabin within 3–5 minutes — a much longer delay is worth flagging.</div>
           </div>
@@ -920,8 +944,8 @@
         <div class="checklist-item" data-models="r1t r1s" onclick="toggleCheck(this,'interior')">
           <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="check-content">
-            <div class="check-label">J1772 AC adapter present — CCS1 DC adapter present (Quad only)</div>
-            <div class="check-note">2026 R1 vehicles include a J1772 adapter. Quad configurations add a CCS1 DC adapter. Confirm both are in the vehicle.</div>
+            <div class="check-label">Charging adapters included with your configuration are present</div>
+            <div class="check-note">2026 R1 vehicles include a J1772 AC adapter. Which DC adapters come in the box varies by configuration — check your order and window sticker, and confirm everything listed is in the vehicle.</div>
           </div>
           <span class="badge badge-important">Important</span>
         </div>
@@ -952,7 +976,7 @@
       </div>
     </div>
     <!-- ══════════════════════════════════
-         4. TECH & SOFTWARE — 10 items
+         4. TECH & SOFTWARE — 11 items
     ═══════════════════════════════════════ -->
     <div class="checklist-section" id="sec-tech">
       <div class="section-header" onclick="toggleSection('tech')">
@@ -966,7 +990,7 @@
           </div>
         </div>
         <div class="section-right">
-          <div class="section-progress" id="prog-tech">0/10</div>
+          <div class="section-progress" id="prog-tech">0/11</div>
           <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
       </div>
@@ -984,6 +1008,14 @@
           <div class="check-content">
             <div class="check-label">Driver display functioning (and rear console screen, if equipped)</div>
             <div class="check-note">Verify speed/range display correctly on the instrument cluster. On R1, confirm the rear console screen responds.</div>
+          </div>
+          <span class="badge badge-important">Important</span>
+        </div>
+        <div class="checklist-item" data-models="r2" onclick="toggleCheck(this,'tech')">
+          <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="check-content">
+            <div class="check-label">Haptic Halo steering wheel controls respond with feedback <span class="model-tag">R2</span></div>
+            <div class="check-note">Test the steering wheel controls for climate, media, autonomy, and drive modes. Each should respond and give a clear haptic click.</div>
           </div>
           <span class="badge badge-important">Important</span>
         </div>
@@ -1015,15 +1047,15 @@
           <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="check-content">
             <div class="check-label">Both KeyCards test on B-pillar reader and center console reader</div>
-            <div class="check-note">2026 R1 vehicles include two KeyCards — no key fob. Test each on both readers. Key fobs are a separate $250 purchase.</div>
+            <div class="check-note">2026 R1 vehicles include two KeyCards — no key fob. Test each on both readers. Key fobs are a separate Gear Shop purchase.</div>
           </div>
           <span class="badge badge-important">Important</span>
         </div>
-        <div class="checklist-item" data-models="r1t r1s" onclick="toggleCheck(this,'tech')">
+        <div class="checklist-item" data-models="r1t r1s r2" onclick="toggleCheck(this,'tech')">
           <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="check-content">
             <div class="check-label">No pending recall-related software updates</div>
-            <div class="check-note">Check Settings → About and confirm no recall-related software updates are pending in the Rivian app. An earlier Highway Assist software recall (25V585000) was remedied over the air; any current delivery ships on far newer software.</div>
+            <div class="check-note">Confirm the vehicle is on current software with no pending update in the Rivian app. Several recent recalls are fixed over the air — including the October 2026 rearview camera recall (26V-597) covering R1 and R2 — so a pending update can mean an open recall.</div>
           </div>
           <span class="badge badge-important">Important</span>
         </div>
@@ -1155,7 +1187,7 @@
           <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="check-content">
             <div class="check-label">NHTSA VIN check completed — all recall campaigns closed</div>
-            <div class="check-note">Do this at nhtsa.gov/recalls the night before. Current R1 campaigns include front turn signals (26V-508 / FSAM-1833, an Aug 2026 expansion of 25V-387), second-row seat belt retractors (26V-009 / FSAM-1795), the rear toe-link joint (26V-003 / FSAM-1794), and cold-weather headlamps (25V-085 / FSAM-1612). The live feed in the sidebar shows the current list by model year. Buying used? The toe-link recall covers 2022–2025 R1S/R1T that had rear-suspension service before March 10, 2025, and NHTSA has an open investigation into toe-link bolt fractures affecting roughly 115,000 earlier R1 vehicles. Bring a screenshot.</div>
+            <div class="check-note">Do this at nhtsa.gov/recalls the night before and confirm every campaign on your VIN is closed — the live feed in the sidebar lists current campaigns by model. <!-- Remove the R2 sentence below after Dec 2026 --><strong>R2 buyers:</strong> the high-voltage battery fastener recall (26V-625) covers a small batch of 2027 R2s, and those VINs only become searchable on NHTSA starting Nov 28, 2026 — before then, ask the delivery specialist to confirm in writing that your VIN isn't affected. Buying a used R1? Ask for proof that rear-suspension recall work is complete. Bring a screenshot.</div>
           </div>
           <span class="badge badge-critical">Critical</span>
         </div>
@@ -1195,7 +1227,7 @@
           <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="check-content">
             <div class="check-label">Service request filed in Rivian app for any noted issues</div>
-            <div class="check-note">Open a service ticket before you leave. Delivery-day tickets get prioritized. The delivery tech can often add notes on the spot.</div>
+            <div class="check-note">Open a service ticket before you leave, so every issue is on record from day one. The delivery tech can often add notes on the spot.</div>
           </div>
           <span class="badge badge-critical">Critical</span>
         </div>
@@ -1236,7 +1268,7 @@
       <div class="sidebar-label">Delivery day tips</div>
       <div class="tip-item">
         <div class="tip-num">1</div>
-        <div class="tip-text"><strong>Run your NHTSA VIN check first</strong>Do this at nhtsa.gov/recalls the night before. Multiple active recalls exist on the 2025–2026 R1 platform.</div>
+        <div class="tip-text"><strong>Run your NHTSA VIN check first</strong>Do this at nhtsa.gov/recalls the night before. Active recalls cover the R1 and R2.</div>
       </div>
       <div class="tip-item">
         <div class="tip-num">2</div>
@@ -1252,7 +1284,7 @@
       </div>
       <div class="tip-item">
         <div class="tip-num">5</div>
-        <div class="tip-text"><strong>Open a service ticket before leaving</strong>Delivery-day tickets get prioritized over after-the-fact submissions.</div>
+        <div class="tip-text"><strong>Open a service ticket before leaving</strong>An issue documented at delivery is much harder to dispute than one reported weeks later.</div>
       </div>
     </div>
     <div class="sidebar-card">
@@ -1295,7 +1327,7 @@
     </div>
     <div class="sidebar-card" style="text-align:center;">
       <div class="sidebar-label">Referral code</div>
-      <p style="font-size:12px; color:var(--text-muted); line-height:1.6; margin-bottom:10px;">Use an owner referral code when ordering — both you and the referrer get Rivian Rewards points plus 3 months of free Adventure Network charging.</p>
+      <p style="font-size:12px; color:var(--text-muted); line-height:1.6; margin-bottom:10px;">Haven't ordered yet? An owner referral code earns you Rivian Rewards perks. <a href="/rivian-referral-code/" style="color:var(--green); text-decoration:none; font-weight:600;">How it works →</a></p>
       <div style="font-family:'DM Sans',sans-serif; font-size:20px; font-weight:800; color:var(--green); letter-spacing:.04em; margin-bottom:4px;">SCOTT4395475</div>
     </div>
   </div>
@@ -1310,7 +1342,6 @@
   <a href="/rivian-referral-code/">Referral Code</a>
   <a href="/about/">About</a>
 </div>
-  </div>
 </footer>
 <script>
   const SECTIONS = ['exterior', 'glass', 'interior', 'tech', 'roadtest', 'docs'];
@@ -1320,7 +1351,7 @@
     all: 'Showing all items. Pick your model to hide checks that don’t apply to it.',
     r1t: 'R1T (truck): includes the tonneau cover and gear tunnel checks.',
     r1s: 'R1S (SUV): tonneau and gear tunnel checks are hidden; third-row/liftgate checks apply.',
-    r2:  'R2: R1-only recalls, gear tunnel, tonneau, and R1-specific equipment are hidden. R2-specific checks will be added as owner data grows.'
+    r2:  'R2: R1-only recalls and equipment (gear tunnel, tonneau, KeyCards) are hidden, and R2-specific checks are included.'
   };
 
   function itemMatches(item, model) {
@@ -1389,11 +1420,11 @@
     document.querySelectorAll('.checklist-item').forEach((el) => {
       state.push(el.classList.contains('checked') ? 1 : 0);
     });
-    localStorage.setItem('rivian-checklist', JSON.stringify(state));
+    localStorage.setItem('rivian-checklist-v2', JSON.stringify(state));
   }
-  function clearState() { localStorage.removeItem('rivian-checklist'); }
+  function clearState() { localStorage.removeItem('rivian-checklist-v2'); }
   function restoreState() {
-    const saved = localStorage.getItem('rivian-checklist');
+    const saved = localStorage.getItem('rivian-checklist-v2');
     if (!saved) return;
     let state;
     try { state = JSON.parse(saved); } catch (e) { return; }
@@ -1435,11 +1466,12 @@
   (async function loadRecallsDelivery() {
     const container = document.getElementById('recallsFeedDelivery');
     const vehicles = [
+      { label: '2027 R2', make: 'Rivian', model: 'R2', year: '2027' },
+      { label: '2027 R1S', make: 'Rivian', model: 'R1S', year: '2027' },
       { label: '2026 R1S', make: 'Rivian', model: 'R1S', year: '2026' },
       { label: '2025 R1S', make: 'Rivian', model: 'R1S', year: '2025' },
       { label: '2026 R1T', make: 'Rivian', model: 'R1T', year: '2026' },
       { label: '2025 R1T', make: 'Rivian', model: 'R1T', year: '2025' },
-      { label: '2026 R2', make: 'Rivian', model: 'R2', year: '2026' },
     ];
     try {
       const results = await Promise.all(vehicles.map(v =>
@@ -1458,7 +1490,7 @@
         })
       })).filter(v => v.recalls.length > 0);
       if (grouped.length === 0) {
-        container.innerHTML = `<p style="font-size:11px; color:var(--text-dim);">No open recalls found for 2025–2026 R1S, R1T, or R2.</p>`;
+        container.innerHTML = `<p style="font-size:11px; color:var(--text-dim);">No open recalls found for 2025–2027 R1S, R1T, or R2.</p>`;
         return;
       }
       container.innerHTML = grouped.map(v => `
