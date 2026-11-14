@@ -12,6 +12,12 @@
   script.async = true;
   script.src = 'https://www.googletagmanager.com/gtag/js?id=G-SB8DBC8NBQ';
   document.head.appendChild(script);
+
+  // Track clicks on any referral link (reprCode) site-wide
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest && e.target.closest('a[href*="reprCode="]');
+    if (a) gtag('event', 'referral_link_click', { page_path: location.pathname, link_text: (a.textContent || '').trim().slice(0, 60) });
+  });
 })();
 
 // ─── Nav ───

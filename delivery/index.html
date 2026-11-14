@@ -12,6 +12,8 @@
   <meta property="og:image" content="https://www.rivianresource.com/r1s.jpg"/>
   <meta property="og:url" content="https://www.rivianresource.com/delivery/"/>
   <meta property="og:type" content="website"/>
+  <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"aabd2c264abb41589ccfd2223c79ae42"}'></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@600;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
@@ -390,6 +392,10 @@
     }
     .owner-note p + p { margin-top: 6px; }
     .owner-note strong { color: var(--text); }
+    /* Referral line shown in main column only on mobile, where the sidebar stacks below the checklist */
+    .mobile-ref { display: none; }
+    @media (max-width: 760px) { .mobile-ref { display: block; } }
+    @media print { .mobile-ref { display: none !important; } }
     /* ── JUMP NAV ACTIVE ── */
     .jump-nav a.active {
       background: var(--green-pale);
@@ -606,6 +612,7 @@
       <div class="stat-pill"><strong id="itemsStat">59</strong> items</div>
       <div class="stat-pill"><strong>~45 min</strong> inspection</div>
       <div class="stat-pill"><strong>6</strong> sections</div>
+      <div class="stat-pill">Reviewed <strong>Nov 2026</strong></div>
     </div>
   </div>
 </div>
@@ -1243,6 +1250,9 @@
       <p><strong>From my delivery:</strong> Using a checklist caught four issues I would have missed — two misaligned doors, a defect in the wood trim, and an HVAC problem where the heater never produced warm air. Rivian's app-based service request system made documenting everything straightforward.</p>
       <p>If you find issues, don't panic. Rivian expects some and the process for getting them fixed is clear. The key is documenting everything <em>before</em> you drive away.</p>
     </div>
+    <div class="owner-note mobile-ref">
+      <p><strong>Still shopping for an R1S or R1T?</strong> Order with owner referral code <strong>SCOTT4395475</strong> for Rivian Rewards points + 3 months of free charging. <a href="/rivian-referral-code/" style="color:var(--green); text-decoration:none; font-weight:600;">How it works →</a></p>
+    </div>
     <div class="owner-note">
       <p>Have a suggestion to improve this checklist? If you've been through a Rivian delivery and noticed something missing, I'd love to hear it — <a href="mailto:rivianresource@gmail.com" style="color:var(--green); text-decoration:none;">rivianresource@gmail.com</a>.</p>
     </div>
@@ -1327,7 +1337,7 @@
     </div>
     <div class="sidebar-card" style="text-align:center;">
       <div class="sidebar-label">Referral code</div>
-      <p style="font-size:12px; color:var(--text-muted); line-height:1.6; margin-bottom:10px;">Haven't ordered yet? An owner referral code earns you Rivian Rewards perks. <a href="/rivian-referral-code/" style="color:var(--green); text-decoration:none; font-weight:600;">How it works →</a></p>
+      <p style="font-size:12px; color:var(--text-muted); line-height:1.6; margin-bottom:10px;">Haven't ordered an R1S or R1T yet? An owner referral code earns you Rivian Rewards points + 3 months of free charging. (R2 orders don't currently qualify.) <a href="/rivian-referral-code/" style="color:var(--green); text-decoration:none; font-weight:600;">How it works →</a></p>
       <div style="font-family:'DM Sans',sans-serif; font-size:20px; font-weight:800; color:var(--green); letter-spacing:.04em; margin-bottom:4px;">SCOTT4395475</div>
     </div>
   </div>
@@ -1342,6 +1352,7 @@
   <a href="/rivian-referral-code/">Referral Code</a>
   <a href="/about/">About</a>
 </div>
+ <p style="margin-top:8px;">Independent owner resource · Not affiliated with Rivian Automotive, Inc.</p>
 </footer>
 <script>
   const SECTIONS = ['exterior', 'glass', 'interior', 'tech', 'roadtest', 'docs'];
