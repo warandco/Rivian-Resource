@@ -159,6 +159,8 @@
     .print-top-btn { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-family: 'Figtree', sans-serif; font-size: 12px; font-weight: 600; color: var(--text-muted); background: none; border: 1px solid var(--border); border-radius: 99px; padding: 6px 13px; cursor: pointer; transition: all .15s; }
     .print-top-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-pale); }
     .print-top-btn svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .print-help { font-size: 12px; color: var(--text-muted); background: #fef9ec; border: 1px solid rgba(186,117,23,0.25); border-radius: 8px; padding: 10px 12px; line-height: 1.55; }
+    @media print { .print-help { display: none !important; } }
     .print-footer { display: none; }
     @media print { .print-footer { display: block !important; margin-top: 14px; padding-top: 10px; border-top: 1px solid #ccc; font-size: 11px; color: #333; line-height: 1.5; } }
     .model-filter {
@@ -654,9 +656,10 @@
       <button type="button" class="model-btn" data-model="r1t" onclick="applyModelFilter('r1t')">R1T<span class="model-ct" data-ct="r1t"></span></button>
       <button type="button" class="model-btn" data-model="r1s" onclick="applyModelFilter('r1s')">R1S<span class="model-ct" data-ct="r1s"></span></button>
       <button type="button" class="model-btn" data-model="r2" onclick="applyModelFilter('r2')">R2<span class="model-ct" data-ct="r2"></span></button>
-      <button type="button" class="print-top-btn" id="printTopBtn" onclick="window.print()"><svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg><span id="printTopLabel">Print checklist</span></button>
+      <button type="button" class="print-top-btn" id="printTopBtn" onclick="printChecklist()"><svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg><span id="printTopLabel">Print checklist</span></button>
     </div>
     <div class="model-hint" id="modelHint"></div>
+    <div class="print-help" id="printHelpTop" role="status" style="display:none;"><strong>Print menu didn't open?</strong> In Safari, tap the Share button, then <strong>Print</strong>. If you opened this link inside an app (Reddit, Google, Gmail), first tap the compass or "Open in Safari," then print.</div>
     <!-- JUMP NAV -->
     <nav class="jump-nav">
       <a href="#sec-exterior">Exterior</a>
@@ -1338,7 +1341,8 @@
       <button class="reset-confirm-yes" onclick="confirmReset()">Yes, reset</button>
       <button class="reset-confirm-no" onclick="hideResetConfirm()">Cancel</button>
     </div>
-    <button class="print-btn" onclick="window.print()">
+    <div class="print-help" id="printHelpBottom" role="status" style="display:none;"><strong>Print menu didn't open?</strong> In Safari, tap the Share button, then <strong>Print</strong>. If you opened this link inside an app (Reddit, Google, Gmail), first tap the compass or "Open in Safari," then print.</div>
+    <button class="print-btn" onclick="printChecklist()">
       <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
       Print checklist
     </button>
@@ -1477,6 +1481,15 @@
     item.classList.toggle('checked');
     recompute();
     saveState();
+  }
+
+  // iOS in-app browsers (Reddit, Google, Gmail) and Chrome on iOS often ignore window.print().
+  // We can't detect that reliably, so on iOS we also show Share -> Print instructions.
+  function printChecklist() {
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (isIOS) ['printHelpTop','printHelpBottom'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'block'; });
+    if (typeof gtag === 'function') gtag('event', 'print_checklist', { model: currentModel, ios: isIOS });
+    try { window.print(); } catch (e) {}
   }
 
   function applyModelFilter(model) {
