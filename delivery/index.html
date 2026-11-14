@@ -167,6 +167,15 @@
       .print-ref-code { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: .04em; white-space: nowrap; }
       .print-ref-url { font-size: 10px; color: #555; white-space: nowrap; }
     }
+    /* ── RESET IN PROGRESS BAR + UNDO TOAST ── */
+    .progress-reset { display: inline-flex; align-items: center; gap: 5px; margin-left: 6px; padding: 5px 10px 5px 14px; border: none; border-left: 1px solid var(--border); background: none; font-family: 'Figtree', sans-serif; font-size: 12px; font-weight: 600; color: var(--text-dim); cursor: pointer; white-space: nowrap; }
+    .progress-reset[hidden] { display: none; }
+    .progress-reset:hover { color: var(--red-text); }
+    .progress-reset svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .undo-toast { position: fixed; left: 50%; bottom: 20px; transform: translate(-50%, 140%); opacity: 0; z-index: 300; display: flex; align-items: center; gap: 16px; background: #111827; color: #fff; font-size: 13px; padding: 11px 12px 11px 18px; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,.25); transition: transform .25s ease, opacity .25s ease; pointer-events: none; max-width: calc(100% - 32px); }
+    .undo-toast.visible { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; }
+    .undo-toast button { background: none; border: 1px solid rgba(255,255,255,.35); color: var(--green-light); font-family: 'DM Sans', sans-serif; font-weight: 800; font-size: 13px; padding: 6px 14px; border-radius: 7px; cursor: pointer; }
+    @media print { .progress-reset, .undo-toast { display: none !important; } }
     .print-footer { display: none; }
     @media print { .print-footer { display: block !important; margin-top: 14px; padding-top: 10px; border-top: 1px solid #ccc; font-size: 11px; color: #333; line-height: 1.5; } }
     .model-filter {
@@ -638,6 +647,7 @@
   <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
   <div class="progress-label" id="progressLabel">0 / 59</div>
   <div class="progress-pct" id="progressPct">0%</div>
+  <button type="button" class="progress-reset" id="progressReset" onclick="resetChecklist()" aria-label="Reset checklist" hidden><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-5"/></svg>Reset</button>
 </div>
 <!-- HEADER -->
 <div class="page-header">
@@ -1342,15 +1352,10 @@
     <div class="owner-note">
       <p>Have a suggestion to improve this checklist? If you've been through a Rivian delivery and noticed something missing, I'd love to hear it — <a href="mailto:rivianresource@gmail.com" style="color:var(--green); text-decoration:none;">rivianresource@gmail.com</a>.</p>
     </div>
-    <button class="reset-btn" onclick="showResetConfirm()">
+    <button class="reset-btn" onclick="resetChecklist()">
       <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-5"/></svg>
       Reset checklist
     </button>
-    <div class="reset-confirm" id="resetConfirm">
-      <span>Reset all progress?</span>
-      <button class="reset-confirm-yes" onclick="confirmReset()">Yes, reset</button>
-      <button class="reset-confirm-no" onclick="hideResetConfirm()">Cancel</button>
-    </div>
     <div class="print-help" id="printHelpBottom" role="status" style="display:none;"><strong>Print menu didn't open?</strong> In Safari, tap the Share button, then <strong>Print</strong>. If you opened this link inside an app (Reddit, Google, Gmail), first tap the compass or "Open in Safari," then print.</div>
     <button class="print-btn" onclick="printChecklist()">
       <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
@@ -1358,6 +1363,7 @@
     </button>
     <div class="print-footer">rivianresource.com/delivery · Ordered an R1S or R1T without a referral code? Ask your Rivian Guide to add <strong>SCOTT4395475</strong> before you sign.</div>
   </div><!-- /main-col -->
+  <div class="undo-toast" id="undoToast" role="status" aria-live="polite"><span id="undoMsg">Checklist reset.</span><button type="button" onclick="undoReset()">Undo</button></div>
   <!-- ══════════════════════════════════
        SIDEBAR
   ═══════════════════════════════════════ -->
@@ -1482,6 +1488,8 @@
     document.getElementById('progressPct').textContent = pct + '%';
     const itemsStat = document.getElementById('itemsStat');
     if (itemsStat) itemsStat.textContent = totalVisible;
+    const pr = document.getElementById('progressReset');
+    if (pr) pr.hidden = !document.querySelector('.checklist-item.checked');
     const banner = document.getElementById('doneBanner');
     if (totalVisible > 0 && totalChecked === totalVisible) banner.classList.add('visible');
     else banner.classList.remove('visible');
@@ -1517,13 +1525,33 @@
   function toggleSection(id) {
     document.getElementById('sec-' + id).classList.toggle('collapsed');
   }
-  function showResetConfirm() { document.getElementById('resetConfirm').classList.add('visible'); }
-  function hideResetConfirm() { document.getElementById('resetConfirm').classList.remove('visible'); }
-  function confirmReset() {
-    hideResetConfirm();
-    document.querySelectorAll('.checklist-item.checked').forEach(el => el.classList.remove('checked'));
+  // Reset with undo (no confirm dialog): snapshot, clear, offer Undo for 10 seconds.
+  let lastResetState = null, undoTimer = null;
+  function resetChecklist() {
+    const items = [...document.querySelectorAll('.checklist-item')];
+    const snapshot = items.map(el => el.classList.contains('checked') ? 1 : 0);
+    const count = snapshot.reduce((a, b) => a + b, 0);
+    if (!count) return;
+    lastResetState = snapshot;
+    items.forEach(el => el.classList.remove('checked'));
     recompute();
     clearState();
+    document.getElementById('undoMsg').textContent = 'Checklist reset (' + count + ' item' + (count === 1 ? '' : 's') + ' cleared).';
+    const t = document.getElementById('undoToast');
+    t.classList.add('visible');
+    clearTimeout(undoTimer);
+    undoTimer = setTimeout(() => { t.classList.remove('visible'); lastResetState = null; }, 10000);
+    if (typeof gtag === 'function') gtag('event', 'reset_checklist', { items_cleared: count });
+  }
+  function undoReset() {
+    if (!lastResetState) return;
+    document.querySelectorAll('.checklist-item').forEach((el, i) => el.classList.toggle('checked', lastResetState[i] === 1));
+    lastResetState = null;
+    clearTimeout(undoTimer);
+    document.getElementById('undoToast').classList.remove('visible');
+    recompute();
+    saveState();
+    if (typeof gtag === 'function') gtag('event', 'undo_reset_checklist');
   }
   function saveState() {
     const state = [];
