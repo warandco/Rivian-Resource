@@ -396,6 +396,23 @@
     .mobile-ref { display: none; }
     @media (max-width: 760px) { .mobile-ref { display: block; } }
     @media print { .mobile-ref { display: none !important; } }
+    /* ── FIRST BUYS ── */
+    .first-buys { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .fb-head { padding: 14px 16px; background: #fafbfc; border-bottom: 1px solid var(--border); }
+    .fb-title { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; color: var(--text); }
+    .fb-sub { font-size: 11.5px; color: var(--text-dim); margin-top: 2px; }
+    .fb-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--border); }
+    .fb-body { flex: 1; min-width: 0; }
+    .fb-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+    .fb-why { font-size: 11.5px; color: var(--text-dim); line-height: 1.55; }
+    .fb-links { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .fb-btn { font-size: 11px; font-weight: 700; color: #fff; background: var(--green); padding: 5px 10px; border-radius: 5px; text-decoration: none; white-space: nowrap; }
+    .fb-btn:hover { background: var(--green-dark); }
+    .fb-review { font-size: 11px; font-weight: 600; color: var(--green); text-decoration: none; white-space: nowrap; }
+    .fb-foot { padding: 10px 16px; font-size: 10.5px; color: var(--text-dim); line-height: 1.5; }
+    .fb-foot a { color: var(--green); font-weight: 600; text-decoration: none; }
+    @media (max-width: 420px) { .fb-item { flex-direction: column; align-items: flex-start; gap: 8px; } }
+    @media print { .first-buys { display: none !important; } }
     /* ── JUMP NAV ACTIVE ── */
     .jump-nav a.active {
       background: var(--green-pale);
@@ -1250,8 +1267,51 @@
       <p><strong>From my delivery:</strong> Using a checklist caught four issues I would have missed — two misaligned doors, a defect in the wood trim, and an HVAC problem where the heater never produced warm air. Rivian's app-based service request system made documenting everything straightforward.</p>
       <p>If you find issues, don't panic. Rivian expects some and the process for getting them fixed is clear. The key is documenting everything <em>before</em> you drive away.</p>
     </div>
+    <!-- FIRST BUYS (affiliate) -->
+    <div class="first-buys" id="first-buys">
+      <div class="fb-head">
+        <div class="fb-title">What I bought after delivery</div>
+        <div class="fb-sub">Owner-tested in my R1S — the five things I'd get in your first week.</div>
+      </div>
+      <div class="fb-item">
+        <div class="fb-body">
+          <div class="fb-name">Samsung T7 Shield 1TB <span class="model-tag">All</span></div>
+          <div class="fb-why">Gear Guard and Drive Cam need a USB drive to save footage. The Shield handles hot parked cabins.</div>
+        </div>
+        <div class="fb-links"><a href="https://link.amazon/B02RpBHF1" target="_blank" rel="noopener noreferrer sponsored" class="fb-btn">Amazon</a><a href="/accessories/#t7shield-review" class="fb-review">Review</a></div>
+      </div>
+      <div class="fb-item">
+        <div class="fb-body">
+          <div class="fb-name">A2Z CCS1 to NACS adapter <span class="model-tag">All</span></div>
+          <div class="fb-why">Lets your NACS-port Rivian use CCS1 fast chargers, including Adventure Network stations. Lives in the frunk.</div>
+        </div>
+        <div class="fb-links"><a href="https://link.amazon/B07cGWtrj" target="_blank" rel="noopener noreferrer sponsored" class="fb-btn">Amazon</a><a href="/accessories/#a2z-adapter" class="fb-review">Review</a></div>
+      </div>
+      <div class="fb-item">
+        <div class="fb-body">
+          <div class="fb-name">TWRAPS matte screen protectors <span class="model-tag">R1 &amp; R2</span></div>
+          <div class="fb-why">Install before the screens collect scratches and fingerprints. Matte hides smudges.</div>
+        </div>
+        <div class="fb-links"><a href="https://amzn.to/4d0EwyM" target="_blank" rel="noopener noreferrer sponsored" class="fb-btn">R1</a><a href="https://link.amazon/B09qHexvt" target="_blank" rel="noopener noreferrer sponsored" class="fb-btn">R2</a><a href="/accessories/#twscreen-review" class="fb-review">Review</a></div>
+      </div>
+      <div class="fb-item">
+        <div class="fb-body">
+          <div class="fb-name">TWRAPS dual wireless charger <span class="model-tag">R1</span></div>
+          <div class="fb-why">MagSafe fixes the stock pad's sliding-phone problem. Looks factory in Dark Ash Wood.</div>
+        </div>
+        <div class="fb-links"><a href="https://link.amazon/B03d0qu65" target="_blank" rel="noopener noreferrer sponsored" class="fb-btn">Amazon</a><a href="/accessories/#twcharger-review" class="fb-review">Review</a></div>
+      </div>
+      <div class="fb-item">
+        <div class="fb-body">
+          <div class="fb-name">Jack pucks <span class="model-tag">All</span></div>
+          <div class="fb-why">Rivians generally need pucks to be lifted safely. Not every mobile tire service carries them.</div>
+        </div>
+        <div class="fb-links"><a href="https://link.amazon/B03dEUQbk" target="_blank" rel="noopener noreferrer sponsored" class="fb-btn">Amazon</a><a href="/accessories/#spare-review" class="fb-review">Review</a></div>
+      </div>
+      <div class="fb-foot">As an Amazon Associate, I earn from qualifying purchases at no extra cost to you. <a href="/accessories/">All accessory reviews →</a></div>
+    </div>
     <div class="owner-note mobile-ref">
-      <p><strong>Still shopping for an R1S or R1T?</strong> Order with owner referral code <strong>SCOTT4395475</strong> for Rivian Rewards points + 3 months of free charging. <a href="/rivian-referral-code/" style="color:var(--green); text-decoration:none; font-weight:600;">How it works →</a></p>
+      <p><strong>Ordered without a referral code?</strong> Ask your Rivian Guide to add one before delivery is complete. It's at Rivian's discretion, so ask early. Owner code <strong>SCOTT4395475</strong> earns you Rivian Rewards points + 3 months of free charging on R1S and R1T orders. <a href="/rivian-referral-code/" style="color:var(--green); text-decoration:none; font-weight:600;">How it works →</a></p>
     </div>
     <div class="owner-note">
       <p>Have a suggestion to improve this checklist? If you've been through a Rivian delivery and noticed something missing, I'd love to hear it — <a href="mailto:rivianresource@gmail.com" style="color:var(--green); text-decoration:none;">rivianresource@gmail.com</a>.</p>
@@ -1337,7 +1397,7 @@
     </div>
     <div class="sidebar-card" style="text-align:center;">
       <div class="sidebar-label">Referral code</div>
-      <p style="font-size:12px; color:var(--text-muted); line-height:1.6; margin-bottom:10px;">Haven't ordered an R1S or R1T yet? An owner referral code earns you Rivian Rewards points + 3 months of free charging. (R2 orders don't currently qualify.) <a href="/rivian-referral-code/" style="color:var(--green); text-decoration:none; font-weight:600;">How it works →</a></p>
+      <p style="font-size:12px; color:var(--text-muted); line-height:1.6; margin-bottom:10px;">Ordered without a code? Ask your Rivian Guide to add one before delivery is complete (at Rivian's discretion — ask early). Earns Rivian Rewards points + 3 months of free charging on R1S and R1T orders. <a href="/rivian-referral-code/" style="color:var(--green); text-decoration:none; font-weight:600;">How it works →</a></p>
       <div style="font-family:'DM Sans',sans-serif; font-size:20px; font-weight:800; color:var(--green); letter-spacing:.04em; margin-bottom:4px;">SCOTT4395475</div>
     </div>
   </div>

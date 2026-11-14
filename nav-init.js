@@ -17,6 +17,9 @@
   document.addEventListener('click', function(e) {
     var a = e.target.closest && e.target.closest('a[href*="reprCode="]');
     if (a) gtag('event', 'referral_link_click', { page_path: location.pathname, link_text: (a.textContent || '').trim().slice(0, 60) });
+    // Track Amazon affiliate clicks site-wide
+    var amz = e.target.closest && e.target.closest('a[href*="amzn.to"], a[href*="link.amazon"], a[href*="amazon.com"]');
+    if (amz) gtag('event', 'affiliate_click', { page_path: location.pathname, link_url: amz.href, link_text: (amz.textContent || '').trim().slice(0, 60) });
   });
 })();
 
