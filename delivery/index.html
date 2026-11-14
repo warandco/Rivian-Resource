@@ -161,6 +161,12 @@
     .print-top-btn svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .print-help { font-size: 12px; color: var(--text-muted); background: #fef9ec; border: 1px solid rgba(186,117,23,0.25); border-radius: 8px; padding: 10px 12px; line-height: 1.55; }
     @media print { .print-help { display: none !important; } }
+    .print-ref-top { display: none; }
+    @media print {
+      .print-ref-top { display: flex !important; justify-content: space-between; align-items: center; gap: 16px; margin: 12px 16px 12px; padding: 8px 12px; border: 1px solid #999; border-radius: 6px; font-size: 11px; color: #222; line-height: 1.5; break-inside: avoid; }
+      .print-ref-code { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: .04em; white-space: nowrap; }
+      .print-ref-url { font-size: 10px; color: #555; white-space: nowrap; }
+    }
     .print-footer { display: none; }
     @media print { .print-footer { display: block !important; margin-top: 14px; padding-top: 10px; border-top: 1px solid #ccc; font-size: 11px; color: #333; line-height: 1.5; } }
     .model-filter {
@@ -646,6 +652,10 @@
       <div class="stat-pill">Reviewed <strong>Nov 2026</strong></div>
     </div>
   </div>
+</div>
+<div class="print-ref-top">
+  <div><strong>Ordered an R1S or R1T without a referral code?</strong> Ask your Rivian Guide to add owner code <span class="print-ref-code">SCOTT4395475</span> before you sign. It earns you Rivian Rewards points + 3 months of free Adventure Network charging (at Rivian's discretion).</div>
+  <div class="print-ref-url">rivianresource.com/delivery</div>
 </div>
 <div class="page-body">
   <div class="main-col">
