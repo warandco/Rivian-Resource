@@ -201,6 +201,13 @@
       line-height: 1.55;
       padding: 2px 2px 0;
     }
+    @media (max-width: 560px) {
+      .model-filter { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 10px; }
+      .model-filter-label { display: none; }
+      .model-btn { padding: 8px 4px; font-size: 13px; text-align: center; white-space: nowrap; }
+      .model-ct { margin-left: 3px; }
+      .print-top-btn { grid-column: 1 / -1; margin-left: 0; justify-content: center; padding: 8px 12px; border-radius: 8px; }
+    }
     .checklist-item.hidden-by-filter { display: none; }
     .checklist-section.hidden-by-filter { display: none; }
     /* ── SECTION CARDS ── */
