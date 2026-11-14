@@ -178,6 +178,10 @@
     @media print { .progress-reset, .undo-toast { display: none !important; } }
     .checklist-actions { display: flex; flex-direction: column; }
     @media print { .checklist-actions { display: none !important; } }
+    .header-ref { margin-top: 10px; font-size: 12.5px; color: rgba(255,255,255,.7); line-height: 1.5; }
+    .header-ref a { color: var(--green-light); font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .header-ref a:hover { text-decoration: underline; }
+    @media print { .header-ref { display: none !important; } }
     .print-footer { display: none; }
     @media print { .print-footer { display: block !important; margin-top: 14px; padding-top: 10px; border-top: 1px solid #ccc; font-size: 11px; color: #333; line-height: 1.5; } }
     .model-filter {
@@ -657,6 +661,7 @@
     <div class="eyebrow">Delivery Day · 2026 R1T, R1S &amp; R2</div>
     <h1 class="page-title">Rivian Delivery Checklist</h1>
     <p class="page-sub"><strong style="color:#fff;">Inspect before you sign</strong> — that's when you have the most leverage. Tap each item, photograph anything off, open a service ticket in the app, then enjoy your Rivian.</p>
+    <p class="header-ref">Ordered without a referral code? Ask your Rivian Guide to add one before delivery — <a href="/rivian-referral-code/">how it works →</a></p>
     <div class="header-stats">
       <div class="stat-pill"><strong id="itemsStat">59</strong> items</div>
       <div class="stat-pill"><strong>~45 min</strong> inspection</div>
