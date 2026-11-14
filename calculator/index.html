@@ -832,7 +832,7 @@
               <div class="calc-result-note" id="resNote">At this rate you'll save $6,287 over 5 years compared to driving your previous vehicle.</div>
 
               <div class="calc-ref-cta" style="margin-top:14px; padding:12px 14px; background:var(--green-pale, #eaf6f0); border:1px solid rgba(29,158,117,.25); border-radius:8px; font-size:13px; line-height:1.6; color:var(--text-muted);">
-                <strong style="color:var(--text);">Make your first 3 months of fast charging free.</strong> Ordering an R1S or R1T? Use owner referral code <strong style="color:var(--text);">SCOTT4395475</strong> for 3 months of free Adventure Network charging plus up to 500 Rivian Rewards points.
+                <strong style="color:var(--text);">Get 3 months of Adventure Network charging free.</strong> Ordering an R1S or R1T? Use owner referral code <strong style="color:var(--text);">SCOTT4395475</strong> for 3 months of free Adventure Network charging plus up to 500 Rivian Rewards points.
                 <div style="margin-top:8px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
                   <a href="https://rivian.com/configurations/list?reprCode=SCOTT4395475" target="_blank" rel="noopener noreferrer" style="font-weight:700; color:#fff; background:var(--green, #1D9E75); padding:6px 12px; border-radius:6px; text-decoration:none; font-size:12px;">Configure on Rivian →</a>
                   <a href="/rivian-referral-code/" style="font-weight:600; color:var(--green, #1D9E75); text-decoration:none; font-size:12px;">How it works</a>
@@ -897,14 +897,14 @@
                 <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
               </div>
               <div class="charger-btn-name">NACS</div>
-              <div class="charger-btn-speed">2024+ / all R2</div>
+              <div class="charger-btn-speed">2026+ R1 / all R2</div>
             </button>
             <button class="charger-btn" data-plug="ccs" onclick="selectPlug(this)">
               <div class="charger-icon">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
               </div>
               <div class="charger-btn-name">CCS1</div>
-              <div class="charger-btn-speed">2022–2023</div>
+              <div class="charger-btn-speed">2022–2025 R1</div>
             </button>
           </div>
           <div id="plugNote" style="margin-top:12px; font-size:12px; color:var(--text-dim); line-height:1.6;"></div>
@@ -1135,10 +1135,6 @@
         <div class="card" style="padding:20px;">
           <div class="section-label">Related</div>
           <div class="resource-row">
-            <div><div class="resource-name">90-Day R1S Review</div><div class="resource-desc">Real charging impressions</div></div>
-            <a href="/reviews/2026-rivian-r1s-90-day-review/#charging" class="resource-link">Read</a>
-          </div>
-          <div class="resource-row">
             <div><div class="resource-name">Charging Map</div><div class="resource-desc">RAN station locator</div></div>
             <a href="https://rivian.com/experience/charging#map" target="_blank" rel="noopener noreferrer" class="resource-link">Open</a>
           </div>
@@ -1259,12 +1255,12 @@
     };
 
     const PLUG_NOTES = {
-      nacs: '2026+ Gen 2 R1S/R1T and all R2 models have a native NACS port — use Rivian Adventure Network and Tesla Superchargers natively. A CCS1 adapter may still be needed for some third-party DC chargers.',
-      ccs:  '2021–2025 Gen 1 R1S/R1T use CCS1 natively. You can access Tesla Superchargers with a Rivian-approved NACS DC adapter (sold separately, ~$200). A2Z also makes a compatible adapter for less.',
+      nacs: '2026 model-year R1S/R1T and all R2 models have a native NACS port — use Rivian Adventure Network and Tesla Superchargers natively. A CCS1 adapter may still be needed for some third-party DC chargers.',
+      ccs:  '2022–2025 model-year R1S/R1T (Gen 1 and 2025 Gen 2) use CCS1 natively. You can access Tesla Superchargers with a Rivian-approved NACS DC adapter (sold separately, ~$200). A2Z also makes a compatible adapter for less.',
     };
 
     function isNacsVehicle(vehicleId) {
-      return vehicleId.startsWith('r2-') || vehicleId.includes('-g2-');
+      return vehicleId.startsWith('r2-');
     }
 
     function updatePlugState(vehicleId) {
@@ -1285,7 +1281,8 @@
           b.style.opacity = '1';
           b.style.cursor = 'pointer';
         });
-        if (currentPlug === 'nacs') {
+        // Gen 2 R1: 2025 MY = CCS1, 2026 MY = NACS — let the user choose. Gen 1 is always CCS1.
+        if (currentPlug === 'nacs' && !vehicleId.includes('-g2-')) {
           currentPlug = 'ccs';
           plugBtns.forEach(b => b.classList.toggle('selected', b.dataset.plug === 'ccs'));
         }
@@ -1312,7 +1309,7 @@
       let html = '';
       const gens = model === 'r2'
         ? [{ key:'gen2', label:'2026–2027' }]
-        : [{ key:'gen2', label:'2026+ (Gen 2 · NACS)' }, { key:'gen1', label:'2021–2025 (Gen 1 · CCS1)' }];
+        : [{ key:'gen2', label:'2025+ (Gen 2)' }, { key:'gen1', label:'2022–2024 (Gen 1 · CCS1)' }];
       gens.forEach(({ key, label }) => {
         if (!data[key]) return;
         html += `<div class="trim-gen-label">${label}</div><div class="vehicle-grid">`;
