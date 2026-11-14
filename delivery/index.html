@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rivian Delivery Checklist — 57-Point Inspection for R2, R1S &amp; R1T</title>
-  <meta name="description" content="Don't sign until you check all 57 items. Owner-built delivery inspection checklist for the Rivian R2, R1S, and R1T — exterior, interior, tech, road test, and active recalls. Takes under an hour."/>
+  <title>Rivian Delivery Checklist — 59-Point Inspection for R2, R1S &amp; R1T</title>
+  <meta name="description" content="Don't sign until you check all 59 items. Owner-built delivery inspection checklist for the Rivian R2, R1S, and R1T — exterior, interior, tech, road test, and active recalls. Takes under an hour."/>
   <link rel="canonical" href="https://www.rivianresource.com/delivery/"/>
-  <meta property="og:title" content="Rivian R2, R1S &amp; R1T Delivery Checklist — 57-Point Inspection Guide"/>
-  <meta property="og:description" content="A 57-point delivery inspection checklist for the Rivian R2, R1S, and R1T. Six sections covering exterior, interior, powertrain, tech, and documentation — designed to complete in under an hour."/>
+  <meta property="og:title" content="Rivian R2, R1S &amp; R1T Delivery Checklist — 59-Point Inspection Guide"/>
+  <meta property="og:description" content="A 59-point delivery inspection checklist for the Rivian R2, R1S, and R1T. Six sections covering exterior, interior, powertrain, tech, and documentation — designed to complete in under an hour."/>
   <meta property="og:image" content="https://www.rivianresource.com/r1s.jpg"/>
   <meta property="og:url" content="https://www.rivianresource.com/delivery/"/>
   <meta property="og:type" content="website"/>
@@ -636,7 +636,7 @@
 <!-- PROGRESS -->
 <div class="progress-bar-wrap">
   <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-  <div class="progress-label" id="progressLabel">0 / 57</div>
+  <div class="progress-label" id="progressLabel">0 / 59</div>
   <div class="progress-pct" id="progressPct">0%</div>
 </div>
 <!-- HEADER -->
@@ -646,7 +646,7 @@
     <h1 class="page-title">Rivian Delivery Checklist</h1>
     <p class="page-sub"><strong style="color:#fff;">Inspect before you sign</strong> — that's when you have the most leverage. Tap each item, photograph anything off, open a service ticket in the app, then enjoy your Rivian.</p>
     <div class="header-stats">
-      <div class="stat-pill"><strong id="itemsStat">57</strong> items</div>
+      <div class="stat-pill"><strong id="itemsStat">59</strong> items</div>
       <div class="stat-pill"><strong>~45 min</strong> inspection</div>
       <div class="stat-pill"><strong>6</strong> sections</div>
       <div class="stat-pill">Reviewed <strong>Nov 2026</strong></div>
@@ -815,6 +815,14 @@
           <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="check-content">
             <div class="check-label">Gear Tunnel doors flush and latch easily <span class="model-tag">R1T</span></div>
+        <div class="checklist-item" data-models="r1t r1s r2" onclick="toggleCheck(this,'exterior')">
+          <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="check-content">
+            <div class="check-label">Tow hitch and tow package present (if ordered)</div>
+            <div class="check-note">If towing equipment is on your order — included with the R2 Launch Package and optional on other R2 trims — confirm the hitch receiver is installed and the trailer wiring connector is present.</div>
+          </div>
+          <span class="badge badge-note">Note</span>
+        </div>
             <div class="check-note">Open and close both sides. Each door should latch without excessive force and sit flush with the body.</div>
           </div>
           <span class="badge badge-important">Important</span>
@@ -1125,6 +1133,14 @@
           </div>
           <span class="badge badge-note">Note</span>
         </div>
+        <div class="checklist-item" data-models="r1t r1s" onclick="toggleCheck(this,'tech')">
+          <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="check-content">
+            <div class="check-label">120V outlets power a device</div>
+            <div class="check-note">Plug a phone charger or small device into each 120V outlet in the cabin and cargo area and confirm it powers on. Outlets may need to be turned on from the center display first.</div>
+          </div>
+          <span class="badge badge-note">Note</span>
+        </div>
         <div class="checklist-item" data-models="r1t r1s r2" onclick="toggleCheck(this,'tech')">
           <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="check-content">
@@ -1354,7 +1370,7 @@
       </div>
       <div class="tip-item">
         <div class="tip-num">2</div>
-        <div class="tip-text"><strong>Download the Rivian App</strong>Your primary key and required to complete delivery.</div>
+        <div class="tip-text"><strong>Set up the Rivian app</strong>Sign in and add your phone key before delivery day so you can test it on the spot.</div>
       </div>
       <div class="tip-item">
         <div class="tip-num">3</div>
@@ -1514,11 +1530,11 @@
     document.querySelectorAll('.checklist-item').forEach((el) => {
       state.push(el.classList.contains('checked') ? 1 : 0);
     });
-    localStorage.setItem('rivian-checklist-v3', JSON.stringify(state));
+    localStorage.setItem('rivian-checklist-v4', JSON.stringify(state));
   }
-  function clearState() { localStorage.removeItem('rivian-checklist-v3'); }
+  function clearState() { localStorage.removeItem('rivian-checklist-v4'); }
   function restoreState() {
-    const saved = localStorage.getItem('rivian-checklist-v3');
+    const saved = localStorage.getItem('rivian-checklist-v4');
     if (!saved) return;
     let state;
     try { state = JSON.parse(saved); } catch (e) { return; }
