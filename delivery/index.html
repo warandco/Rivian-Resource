@@ -156,6 +156,11 @@
     }
     .main-col { display: flex; flex-direction: column; gap: 12px; }
     /* ── MODEL FILTER ── */
+    .print-top-btn { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-family: 'Figtree', sans-serif; font-size: 12px; font-weight: 600; color: var(--text-muted); background: none; border: 1px solid var(--border); border-radius: 99px; padding: 6px 13px; cursor: pointer; transition: all .15s; }
+    .print-top-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-pale); }
+    .print-top-btn svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .print-footer { display: none; }
+    @media print { .print-footer { display: block !important; margin-top: 14px; padding-top: 10px; border-top: 1px solid #ccc; font-size: 11px; color: #333; line-height: 1.5; } }
     .model-filter {
       display: flex;
       align-items: center;
@@ -642,6 +647,7 @@
       <button type="button" class="model-btn" data-model="r1t" onclick="applyModelFilter('r1t')">R1T<span class="model-ct" data-ct="r1t"></span></button>
       <button type="button" class="model-btn" data-model="r1s" onclick="applyModelFilter('r1s')">R1S<span class="model-ct" data-ct="r1s"></span></button>
       <button type="button" class="model-btn" data-model="r2" onclick="applyModelFilter('r2')">R2<span class="model-ct" data-ct="r2"></span></button>
+      <button type="button" class="print-top-btn" id="printTopBtn" onclick="window.print()"><svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg><span id="printTopLabel">Print checklist</span></button>
     </div>
     <div class="model-hint" id="modelHint"></div>
     <!-- JUMP NAV -->
@@ -1329,6 +1335,7 @@
       <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
       Print checklist
     </button>
+    <div class="print-footer">rivianresource.com/delivery · Ordered an R1S or R1T without a referral code? Ask your Rivian Guide to add <strong>SCOTT4395475</strong> before you sign.</div>
   </div><!-- /main-col -->
   <!-- ══════════════════════════════════
        SIDEBAR
@@ -1472,6 +1479,8 @@
     );
     const hint = document.getElementById('modelHint');
     if (hint) hint.textContent = MODEL_HINTS[model] || '';
+    const pl = document.getElementById('printTopLabel');
+    if (pl) pl.textContent = model === 'all' ? 'Print checklist' : 'Print ' + model.toUpperCase() + ' checklist';
     recompute();
   }
 
