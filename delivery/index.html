@@ -647,6 +647,47 @@
     .recall-consequence-sm { font-size: 11px; color: var(--text-muted); line-height: 1.45; }
     .recall-vehicle-sm { font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: .06em; margin: 10px 0 5px; }
     .recall-vehicle-sm:first-child { margin-top: 0; }
+
+    /* ── BEFORE DELIVERY DAY (collapsible) ── */
+    .prep { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 12px; }
+    .prep summary { list-style: none; cursor: pointer; padding: 13px 16px; display: flex; align-items: center; justify-content: space-between; gap: 10px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; color: var(--text); -webkit-tap-highlight-color: transparent; }
+    .prep summary::-webkit-details-marker { display: none; }
+    .prep summary .prep-sub { display: block; font-family: 'Figtree', sans-serif; font-size: 11px; font-weight: 400; color: var(--text-dim); margin-top: 1px; }
+    .prep[open] summary .chevron { transform: none; }
+    .prep:not([open]) summary .chevron { transform: rotate(-90deg); }
+    .prep ol { margin: 0; padding: 4px 16px 14px 34px; border-top: 1px solid var(--border); }
+    .prep li { font-size: 13px; color: var(--text-muted); line-height: 1.55; padding: 8px 0 0; }
+    .prep li strong { color: var(--text); }
+    .prep a { color: var(--green); }
+    @media print { .prep { display: none !important; } }
+    /* ── DEFECT LOG ── */
+    .flag-btn { display: inline-block; margin-top: 6px; padding: 0; border: none; background: none; font: inherit; font-size: 11px; font-weight: 600; color: var(--text-dim); cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+    .flag-btn:hover { color: var(--red-text); }
+    .checklist-item.flagged { box-shadow: inset 3px 0 0 #dc2626; }
+    .checklist-item.flagged .flag-btn { color: var(--red-text); }
+    .checklist-item.flagged.checked { background: var(--red-bg); }
+    .checklist-item.flagged.checked .check-label { text-decoration: none; color: var(--text); }
+    .checklist-item.flagged.checked .check-note { color: var(--text-dim); }
+    .checklist-item.flagged.checked .check-box { background: #dc2626; border-color: #dc2626; }
+    .flag-note { display: none; width: 100%; margin-top: 6px; padding: 7px 9px; border: 1px solid #fca5a5; border-radius: var(--radius-sm); background: #fff; font: inherit; font-size: 13px; color: var(--text); resize: vertical; min-height: 38px; }
+    .checklist-item.flagged .flag-note { display: block; }
+    .flag-note:focus { outline: none; border-color: #dc2626; box-shadow: 0 0 0 2px rgba(220,38,38,.15); }
+    .flag-note-print { display: none; }
+    .issues-box { display: none; margin: 14px 0 12px; padding: 14px 16px; background: var(--red-bg); border: 1px solid #fecaca; border-radius: var(--radius); }
+    .issues-box.visible { display: block; }
+    .issues-box h3 { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; color: var(--red-text); margin-bottom: 4px; }
+    .issues-box p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+    .issues-box ol { margin: 8px 0 10px 18px; font-size: 13px; color: var(--text); line-height: 1.5; }
+    .issues-box ol li { padding: 2px 0; }
+    .issues-box ol li span { color: var(--text-muted); }
+    .issues-copy { padding: 9px 14px; border: none; border-radius: var(--radius-sm); background: var(--red-text); color: #fff; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
+    @media print {
+      .flag-btn, .flag-note, .issues-copy, .issues-hint { display: none !important; }
+      .checklist-item.flagged { box-shadow: none; border-left: 3px solid #000; }
+      .checklist-item.flagged .flag-note-print { display: block !important; margin-top: 4px; font-size: 11px; font-weight: 600; color: #000; }
+      .issues-box.visible { display: block !important; background: #fff; border: 1px solid #999; break-inside: avoid; }
+      .issues-box h3 { color: #000; }
+    }
   </style>
 </head>
 <body>
@@ -663,7 +704,7 @@
   <div class="page-header-inner">
     <div class="eyebrow">Delivery Day · 2026 R1T, R1S &amp; R2</div>
     <h1 class="page-title">Rivian Delivery Checklist</h1>
-    <p class="page-sub"><strong style="color:#fff;">Inspect before you sign</strong> — that's when you have the most leverage. Most items pass in seconds; the point is catching the rare problem while it's still easy to document. Tap each item, photograph anything off, open a service ticket in the app, then enjoy your Rivian.</p>
+    <p class="page-sub"><strong style="color:#fff;">Inspect before you sign</strong> — that's when you have the most leverage. Most items pass in seconds; the point is catching the rare problem while it's still easy to document. Tap each item, flag and photograph anything off, then paste the issue list into a service request in the app.</p>
     <p class="header-ref">Ordered without a referral code? Ask your Rivian Guide to add one before delivery — <a href="/rivian-referral-code/">how it works →</a></p>
     <div class="header-stats">
       <div class="stat-pill"><strong id="itemsStat">62</strong> items</div>
@@ -679,6 +720,18 @@
 </div>
 <div class="page-body">
   <div class="main-col">
+    <!-- BEFORE DELIVERY DAY -->
+    <details class="prep" id="prepDetails">
+      <summary><span>Before delivery day<span class="prep-sub">6 things to finish in the days before you pick up</span></span><svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+      <ol>
+        <li><strong>Finish your purchase steps in the Rivian app.</strong> Upload proof of insurance, sign contracts, and submit final payment before delivery. Insurance rules vary by state — <a href="https://rivian.com/support/article/what-insurance-documents-do-i-need-before-delivery" target="_blank" rel="noopener noreferrer">check Rivian's state list</a>.</li>
+        <li><strong>Trading in a vehicle?</strong> <a href="https://rivian.com/experience/purchasing" target="_blank" rel="noopener noreferrer">Rivian asks you to bring the physical title</a> on delivery day if you hold it.</li>
+        <li><strong>Ordered without a referral code?</strong> Ask your Rivian Guide to add one before delivery is complete — <a href="/rivian-referral-code/">how it works</a>.</li>
+        <li><strong>Set up the Rivian app and phone key</strong> so you can test it at pickup instead of setting it up there.</li>
+        <li><strong>Run the NHTSA recall check</strong> on your VIN the night before at <a href="https://www.nhtsa.gov/recalls" target="_blank" rel="noopener noreferrer">nhtsa.gov/recalls</a>.</li>
+        <li><strong>Plan for the inspection.</strong> Allow about 45 minutes, inspect in good light, and bring a charged phone for photos and its flashlight for the undercarriage. Pick your model below so only the checks that apply are shown.</li>
+      </ol>
+    </details>
     <!-- MODEL FILTER -->
     <div class="model-filter" id="modelFilter" role="group" aria-label="Filter checklist by model">
       <span class="model-filter-label">Model</span>
@@ -1332,6 +1385,13 @@
       <div class="done-banner-title">&#10003; Inspection Complete</div>
       <div class="done-banner-sub">All items checked. File any open service requests before you drive away — then go enjoy your Rivian.</div>
     </div>
+    <!-- DEFECT LOG SUMMARY -->
+    <div class="issues-box" id="issuesBox" aria-live="polite">
+      <h3 id="issuesTitle">Issues found</h3>
+      <p class="issues-hint">Photograph each one, then paste this list into a service request in the Rivian app before you drive away.</p>
+      <ol id="issuesList"></ol>
+      <button type="button" class="issues-copy" id="issuesCopy" onclick="copyIssues()">Copy for service request</button>
+    </div>
     <div class="checklist-actions">
     <div class="print-help" id="printHelpBottom" role="status" style="display:none;"><strong>Print menu didn't open?</strong> In Safari, tap the Share button, then <strong>Print</strong>. If you opened this link inside an app (Reddit, Google, Gmail), first tap the compass or "Open in Safari," then print.</div>
     <button class="print-btn" onclick="printChecklist()" style="margin-top:0;">
@@ -1525,7 +1585,7 @@
     const itemsStat = document.getElementById('itemsStat');
     if (itemsStat) itemsStat.textContent = totalVisible;
     const pr = document.getElementById('progressReset');
-    if (pr) pr.hidden = !document.querySelector('.checklist-item.checked');
+    if (pr) pr.hidden = !document.querySelector('.checklist-item.checked, .checklist-item.flagged');
     const banner = document.getElementById('doneBanner');
     if (totalVisible > 0 && totalChecked === totalVisible) banner.classList.add('visible');
     else banner.classList.remove('visible');
@@ -1562,14 +1622,16 @@
     document.getElementById('sec-' + id).classList.toggle('collapsed');
   }
   // Reset with undo (no confirm dialog): snapshot, clear, offer Undo for 10 seconds.
-  let lastResetState = null, undoTimer = null;
+  let lastResetState = null, lastResetIssues = null, undoTimer = null;
   function resetChecklist() {
     const items = [...document.querySelectorAll('.checklist-item')];
     const snapshot = items.map(el => el.classList.contains('checked') ? 1 : 0);
     const count = snapshot.reduce((a, b) => a + b, 0);
-    if (!count) return;
+    if (!count && !Object.keys(issues).length) return;
     lastResetState = snapshot;
+    lastResetIssues = Object.assign({}, issues);
     items.forEach(el => el.classList.remove('checked'));
+    issues = {}; applyIssues(); saveIssues();
     recompute();
     clearState();
     document.getElementById('undoMsg').textContent = 'Checklist reset (' + count + ' item' + (count === 1 ? '' : 's') + ' cleared).';
@@ -1583,6 +1645,7 @@
     if (!lastResetState) return;
     document.querySelectorAll('.checklist-item').forEach((el, i) => el.classList.toggle('checked', lastResetState[i] === 1));
     lastResetState = null;
+    if (lastResetIssues) { issues = lastResetIssues; lastResetIssues = null; applyIssues(); saveIssues(); }
     clearTimeout(undoTimer);
     document.getElementById('undoToast').classList.remove('visible');
     recompute();
@@ -1615,7 +1678,71 @@
     el.textContent = n;
   });
 
+  // ── Defect log: flag an item, add a note, copy the list for a service request.
+  // Stored by item label (not index) so notes survive checklist reordering.
+  const ISSUES_KEY = 'rivian-checklist-issues-v1';
+  let issues = {};
+  try { issues = JSON.parse(localStorage.getItem(ISSUES_KEY) || '{}') || {}; } catch (e) { issues = {}; }
+  function itemLabel(el) { const l = el.querySelector('.check-label'); return l ? l.textContent.trim() : ''; }
+  function saveIssues() { try { localStorage.setItem(ISSUES_KEY, JSON.stringify(issues)); } catch (e) {} }
+  function shortLabel(k) { return k.split(' — ')[0]; }
+  function esc(t) { return t.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+  function renderIssues() {
+    const keys = [...document.querySelectorAll('.checklist-item.flagged')].map(itemLabel);
+    const box = document.getElementById('issuesBox');
+    box.classList.toggle('visible', keys.length > 0);
+    document.getElementById('issuesTitle').textContent = keys.length + (keys.length === 1 ? ' issue' : ' issues') + ' found';
+    document.getElementById('issuesList').innerHTML = keys.map(k =>
+      '<li>' + esc(shortLabel(k)) + (issues[k] ? ' <span>— ' + esc(issues[k]) + '</span>' : '') + '</li>').join('');
+  }
+  function applyIssues() {
+    document.querySelectorAll('.checklist-item').forEach(el => {
+      const k = itemLabel(el), on = Object.prototype.hasOwnProperty.call(issues, k);
+      el.classList.toggle('flagged', on);
+      el.querySelector('.flag-btn').textContent = on ? 'Remove flag' : 'Flag issue';
+      el.querySelector('.flag-note').value = on ? issues[k] : '';
+      el.querySelector('.flag-note-print').textContent = on && issues[k] ? 'Issue: ' + issues[k] : (on ? 'Issue flagged' : '');
+    });
+    renderIssues();
+    recompute();
+  }
+  function toggleFlag(el) {
+    const k = itemLabel(el);
+    if (Object.prototype.hasOwnProperty.call(issues, k)) { delete issues[k]; }
+    else {
+      issues[k] = '';
+      if (!el.classList.contains('checked')) { el.classList.add('checked'); saveState(); }
+      if (typeof gtag === 'function') gtag('event', 'flag_issue', { item: k.slice(0, 90) });
+    }
+    saveIssues(); applyIssues();
+    if (issues.hasOwnProperty(k)) el.querySelector('.flag-note').focus();
+  }
+  function copyIssues() {
+    const keys = [...document.querySelectorAll('.checklist-item.flagged')].map(itemLabel);
+    const text = 'Delivery inspection: ' + keys.length + (keys.length === 1 ? ' issue' : ' issues') + ' found\n' +
+      keys.map((k, i) => (i + 1) + '. ' + shortLabel(k) + (issues[k] ? ': ' + issues[k] : '')).join('\n');
+    const btn = document.getElementById('issuesCopy');
+    const done = () => { btn.textContent = 'Copied'; setTimeout(() => { btn.textContent = 'Copy for service request'; }, 2000); };
+    const fallback = () => { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} ta.remove(); };
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+    if (typeof gtag === 'function') gtag('event', 'copy_issues', { issue_count: keys.length });
+  }
+  document.querySelectorAll('.checklist-item').forEach(el => {
+    const c = el.querySelector('.check-content');
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'flag-btn'; b.textContent = 'Flag issue';
+    b.addEventListener('click', e => { e.stopPropagation(); toggleFlag(el); });
+    const n = document.createElement('textarea'); n.className = 'flag-note'; n.rows = 1;
+    n.placeholder = 'What and where? (e.g. chip on driver door, 2 in. below handle). Photograph it too.';
+    n.setAttribute('aria-label', 'Describe the issue');
+    n.addEventListener('click', e => e.stopPropagation());
+    n.addEventListener('input', () => { issues[itemLabel(el)] = n.value; saveIssues(); renderIssues();
+      el.querySelector('.flag-note-print').textContent = n.value ? 'Issue: ' + n.value : 'Issue flagged'; });
+    const pn = document.createElement('div'); pn.className = 'flag-note-print';
+    c.appendChild(b); c.appendChild(n); c.appendChild(pn);
+  });
+
   restoreState();
+  applyIssues();
   applyModelFilter('all');
 
   (function initJumpNav() {
