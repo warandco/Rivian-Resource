@@ -1156,10 +1156,9 @@
   <footer>
       <div class="footer-guides">
         <span class="footer-guides-label">Pages</span>
-        <a href="/reviews/2026-rivian-r1s-90-day-review/">Review</a>
         <a href="/delivery/">Delivery Checklist</a>
         <a href="/accessories/">Accessories</a>
-        <a href="/calculator/">Charging Calculator</a>
+        <a href="/calculator/">Calculator</a>
         <a href="/rivian-referral-code/">Referral Code</a>
         <a href="/about/">About</a>
       </div>
@@ -1708,8 +1707,10 @@
         input.value = price.toFixed(2);
         const hint = document.getElementById('gasHint');
         if (hint) {
-          const where = !isNaN(statePrice) ? (regionName || state) + ' avg' : 'US avg';
-          hint.textContent = `${where} ~$${price.toFixed(2)}${data.updated ? ' (updated ' + data.updated + ')' : ''}. Edit to match your local price`;
+          const src  = (!isNaN(statePrice) && data.sources && data.sources[state]) || 'US';
+          const who  = !isNaN(statePrice) ? (regionName || state) + ' ' : '';
+          const week = data.updated ? `, week of ${data.updated}` : '';
+          hint.textContent = `${who}~$${price.toFixed(2)} (EIA ${src} avg${week}). Edit for your local price`;
         }
         calcCost();
       } catch(e) {

@@ -1,4 +1,4 @@
-# Gas price updater v2
+# Gas price updater v3 — all states from live EIA series (scripts/build-gas-prices.js)
 name: Update Gas Prices
 
 on:
@@ -19,38 +19,11 @@ jobs:
         env:
           EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
         run: |
-          curl -s --globoff "https://api.eia.gov/v2/petroleum/pri/gnd/data/?api_key=${EIA_API_KEY}&frequency=weekly&data[0]=value&facets[series][]=EMM_EPMR_PTE_NUS_DPG&facets[series][]=EMM_EPMR_PTE_R10_DPG&facets[series][]=EMM_EPMR_PTE_R20_DPG&facets[series][]=EMM_EPMR_PTE_R30_DPG&facets[series][]=EMM_EPMR_PTE_R40_DPG&facets[series][]=EMM_EPMR_PTE_R50_DPG&sort[0][column]=period&sort[0][direction]=desc&length=10" > eia_raw.json
-          echo "EIA response:"
-          cat eia_raw.json
+          curl -sf --globoff "https://api.eia.gov/v2/petroleum/pri/gnd/data/?api_key=${EIA_API_KEY}&frequency=weekly&data[0]=value&facets[series][]=EMM_EPMR_PTE_NUS_DPG&facets[series][]=EMM_EPMR_PTE_R10_DPG&facets[series][]=EMM_EPMR_PTE_R20_DPG&facets[series][]=EMM_EPMR_PTE_R30_DPG&facets[series][]=EMM_EPMR_PTE_R40_DPG&facets[series][]=EMM_EPMR_PTE_R50_DPG&facets[series][]=EMM_EPMR_PTE_R5XCA_DPG&facets[series][]=EMM_EPMR_PTE_SCA_DPG&facets[series][]=EMM_EPMR_PTE_SCO_DPG&facets[series][]=EMM_EPMR_PTE_SFL_DPG&facets[series][]=EMM_EPMR_PTE_SMA_DPG&facets[series][]=EMM_EPMR_PTE_SMN_DPG&facets[series][]=EMM_EPMR_PTE_SNY_DPG&facets[series][]=EMM_EPMR_PTE_SOH_DPG&facets[series][]=EMM_EPMR_PTE_STX_DPG&facets[series][]=EMM_EPMR_PTE_SWA_DPG&sort[0][column]=period&sort[0][direction]=desc&length=100" > eia_raw.json
+          echo "EIA response size: $(wc -c < eia_raw.json) bytes"
 
-      - name: Process and write gas-prices.json
-        run: |
-          node -e "
-          const raw = require('./eia_raw.json');
-          const data = raw.response.data;
-          const latest = {};
-          data.forEach(d => {
-            if (!latest[d.series]) latest[d.series] = d.value;
-          });
-          const national = latest['EMM_EPMR_PTE_NUS_DPG'] || 3.39;
-          const prices = {
-            updated: new Date().toISOString().split('T')[0],
-            national: parseFloat(national).toFixed(2),
-            states: {
-              AL:3.19, AK:3.89, AZ:3.45, AR:3.09, CA:parseFloat(latest['EMM_EPMR_PTE_R50_DPG'] || 4.79).toFixed(2),
-              CO:3.29, CT:3.49, DE:3.19, FL:3.39, GA:3.09, HI:4.69,
-              ID:3.39, IL:3.59, IN:3.29, IA:3.19, KS:3.09, KY:3.09,
-              LA:3.09, ME:3.39, MD:3.29, MA:3.49, MI:3.39, MN:3.19,
-              MS:3.09, MO:3.09, MT:3.39, NE:3.19, NV:3.89, NH:3.39,
-              NJ:3.29, NM:3.29, NY:3.59, NC:3.19, ND:3.19, OH:3.19,
-              OK:3.09, OR:3.79, PA:3.49, RI:3.39, SC:3.09, SD:3.19,
-              TN:3.09, TX:3.09, UT:3.49, VT:3.39, VA:3.29, WA:3.99,
-              WV:3.19, WI:3.19, WY:3.29, DC:3.59
-            }
-          };
-          require('fs').writeFileSync('scripts/gas-prices.json', JSON.stringify(prices, null, 2));
-          console.log('Written gas-prices.json with national avg: ' + national);
-          "
+      - name: Build gas-prices.json
+        run: node scripts/build-gas-prices.js eia_raw.json
 
       - name: Commit updated prices
         run: |
